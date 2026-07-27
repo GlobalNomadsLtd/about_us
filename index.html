@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GLOBAL NOMADS LTD - About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #00ffff;
+            --neon-pink: #ff00ff;
+            --dark-bg: #050014;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--dark-bg);
+            font-family: 'Press Start 2P', monospace;
+            user-select: none;
+        }
+
+        /* Background Elements (Matching index.html) */
+        .sky-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 55%;
+            background: linear-gradient(to bottom, #02000a 0%, #1a0033 100%);
+            z-index: 1;
+        }
+
+        .stars {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 4px);
+            background-size: 150px 150px;
+            background-position: 0 0, 75px 75px;
+            opacity: 0.3;
+        }
+
+        .synth-sun {
+            position: absolute; bottom: 0; left: 50%; transform: translate(-50%, 35%);
+            width: 300px; height: 300px; border-radius: 50%;
+            background: linear-gradient(to bottom, #ffdf00 0%, #ff00ff 100%);
+            box-shadow: 0 0 60px #ff00ff;
+            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 50%), repeating-linear-gradient(to bottom, black 0px, black 4px, transparent 4px, transparent 8px);
+            mask-image: linear-gradient(to bottom, black 50%, transparent 50%), repeating-linear-gradient(to bottom, black 0px, black 4px, transparent 4px, transparent 8px);
+            z-index: 2;
+        }
+
+        .grid-bg {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 45%;
+            background-color: #050014; border-top: 3px solid var(--neon-cyan);
+            box-shadow: 0 -5px 20px var(--neon-cyan);
+            overflow: hidden; z-index: 3; perspective: 600px;
+        }
+
+        .grid-plane {
+            position: absolute; width: 200%; height: 200%;
+            bottom: -50%; left: -50%;
+            background-image: linear-gradient(var(--neon-pink) 2px, transparent 2px), linear-gradient(90deg, var(--neon-pink) 2px, transparent 2px);
+            background-size: 60px 60px;
+            transform: rotateX(75deg); animation: grid-scroll 1s linear infinite; opacity: 0.8;
+        }
+
+        @keyframes grid-scroll {
+            0% { transform: rotateX(75deg) translateY(0); }
+            100% { transform: rotateX(75deg) translateY(60px); }
+        }
+
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px; z-index: 100; pointer-events: none;
+        }
+
+        .chrome-text {
+            font-family: 'Orbitron', sans-serif; font-weight: 900;
+            font-size: clamp(1.5rem, 6vw, 3.5rem);
+            background: linear-gradient(to bottom, #ffffff 0%, #a0a0a0 45%, #202020 50%, #ff00ff 55%, #00ffff 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 5px rgba(0,255,255,0.5));
+            letter-spacing: 2px; text-align: center; line-height: 1.2;
+        }
+
+        .content-layer {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 50; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center;
+            padding: 1rem;
+        }
+
+        .terminal-box {
+            background: rgba(5, 0, 20, 0.85);
+            border: 2px solid var(--neon-pink);
+            border-radius: 5px;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 800px;
+            max-height: 60vh;
+            overflow-y: auto;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.4), inset 0 0 10px rgba(255, 0, 255, 0.2);
+            backdrop-filter: blur(8px);
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            font-family: 'Press Start 2P', monospace;
+            line-height: 1.8;
+            font-size: clamp(0.55rem, 2vw, 0.8rem);
+        }
+
+        @media (min-width: 768px) {
+            .terminal-box { padding: 2.5rem; }
+        }
+
+        /* Custom Scrollbar for the terminal */
+        .terminal-box::-webkit-scrollbar { width: 10px; }
+        .terminal-box::-webkit-scrollbar-track { background: #000; border-left: 1px solid var(--neon-pink); }
+        .terminal-box::-webkit-scrollbar-thumb { background: var(--neon-cyan); }
+        .terminal-box::-webkit-scrollbar-thumb:hover { background: #fff; }
+
+        .terminal-text { color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); margin-bottom: 1.5rem; }
+        .terminal-highlight { color: var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink); }
+        
+        .menu-btn { 
+            color: #fff; padding: 15px 30px; cursor: pointer; font-size: 1rem; 
+            text-shadow: 0 0 5px var(--neon-cyan);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .menu-btn:hover { 
+            color: var(--neon-pink); 
+            text-shadow: 0 0 10px var(--neon-pink);
+            border: 2px solid var(--neon-pink);
+            background: rgba(255, 0, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="scanlines"></div>
+
+    <div class="sky-bg">
+        <div class="stars"></div>
+        <div class="synth-sun"></div>
+    </div>
+    
+    <div class="grid-bg">
+        <div class="grid-plane"></div>
+    </div>
+
+    <div class="content-layer">
+        <h1 class="chrome-text">CORPORATE DATABANK</h1>
+        
+        <div class="terminal-box">
+            <p class="terminal-text">
+                <span class="terminal-highlight">> INITIATING SYSTEM...</span><br>
+                <span class="terminal-highlight">> ACCESSING ARCHIVES...</span><br>
+                > MATCH FOUND: GLOBAL NOMADS LTD.
+            </p>
+            
+            <p class="terminal-text">
+                <span class="terminal-highlight">ESTABLISHED:</span> 2026<br>
+                <span class="terminal-highlight">HEADQUARTERS:</span> 5th Floor, 167-169 Great Portland Street, London, England, W1W 5PF<br>
+                <span class="terminal-highlight">PRIMARY DIRECTIVE:</span> Create mobile apps for all.<br>
+                <span class="terminal-highlight">CONTACT US:</span> <a href="mailto:info@globalnomads.co.uk" style="color: inherit; text-decoration: none; border-bottom: 1px dashed var(--neon-cyan);" onmouseover="this.style.color='var(--neon-pink)'; this.style.borderColor='var(--neon-pink)'" onmouseout="this.style.color='inherit'; this.style.borderColor='var(--neon-cyan)'">info@globalnomads.co.uk</a>
+            </p>
+
+            <p class="terminal-text">
+                We are the pioneers of the digital frontier. Before the grid was mapped, Global Nomads Ltd. was already laying the neon pathways that connect distant nodes across the cyberspace horizon.
+            </p>
+
+            <p class="terminal-text">
+                Specializing in high-speed datalink transitions, cyber-spatial routing, and immersive travel experiences, we provide seamless integration for the modern nomad. Our proprietary Mode-7 rendering engines and synth-wave communication protocols ensure you reach your destination with maximum fidelity and style.
+            </p>
+
+            <p class="terminal-text">
+                Whether navigating the AutoQuest highways or charting unknown sectors, we don't just ride the wave... <span class="terminal-highlight">we program it.</span>
+            </p>
+            
+            <p class="terminal-text">
+                <span class="animate-pulse">_</span>
+            </p>
+        </div>
+
+        <a href="index.html" class="menu-btn">RETURN TO MAIN MENU</a>
+    </div>
+</body>
+</html>
